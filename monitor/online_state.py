@@ -15,12 +15,18 @@ def write_to_logs():
     """
     pass
 
+
 def write_to_service_list(sample):
     """
     function get sample and insert it
     to the 'service_list.txt'
     """
-    pass
+    with open("service_list.txt", "a") as f:
+        for name, status in sample:
+            current_time = time.ctime().replace(' ', '-')
+            print(f"{current_time} {name} {status}")
+            f.write(f"{current_time} {name} {status}\n")
+    
 
 def get_sample(get_sample_by_os ,time_at_seconds):
     """
@@ -29,7 +35,7 @@ def get_sample(get_sample_by_os ,time_at_seconds):
     and than, insert it to Queue for logs file.
     """
     while True:
-        smaple = get_sample_by_os()
+        sample = get_sample_by_os()
         write_to_service_list(sample)
     
         #insert sample into Queue for comparation
@@ -53,3 +59,5 @@ def main(time_at_seconds):
     # for linux
     else:
         pass
+
+#main(5)
