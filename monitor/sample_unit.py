@@ -14,6 +14,12 @@ def win_sample():
 
 
 def linux_sample():
+    """
+    The function return the services sample for linux operation system.
+    Sample is returned as a list of tuples (couples when first value is the server status -
+    'still running or already stopped' and the second value is the service's name.
+    :return: the services list as a tuple: [(STATUS, SERVICE_NAME)...].
+    """
     running = '+'
     services_lst = []
     output_str = subprocess.check_output("service --status-all", shell=True).decode("UTF-8")
