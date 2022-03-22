@@ -22,15 +22,24 @@ def write_to_service_list(sample):
     """
     pass
 
-def win_get_sample(time_at_seconds):
+def get_sample(get_sample_by_os ,time_at_seconds):
     """
     function get sample every time_at_seconds
     and sent it to write into service_list.
     and than, insert it to Queue for logs file.
     """
-    smaple = sample_unit.win_sample()
-    write_to_service_list(sample)
-    # TODO: deal with queuq and logs.
+    while True:
+        smaple = get_sample_by_os()
+        write_to_service_list(sample)
+    
+        #insert sample into Queue for comparation
+        if len(Queue) == 2:
+            Queue.pop()
+        Queue.insert(0, sample)
+    
+        write_to_logs()
+        
+        time.sleep(time_at_seconds)
     
     
 
@@ -39,7 +48,7 @@ def main(time_at_seconds):
     # check witch type of sample to take.
     # for windows
     if WINDOWS in sys.platform:
-        win_get_sample(time_at_seconds)
+        get_sample(sample_unit.win_sample, time_at_seconds)
     
     # for linux
     else:
