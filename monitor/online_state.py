@@ -1,5 +1,5 @@
 import sys
-from threading import Thread
+import time
 import sample_unit
 
 WINDOWS = "win"
@@ -28,14 +28,19 @@ def win_get_sample(time_at_seconds):
     and sent it to write into service_list.
     and than, insert it to Queue for logs file.
     """
-    pass
+    smaple = sample_unit.win_sample()
+    write_to_service_list(sample)
+    # TODO: deal with queuq and logs.
+    
     
 
 def main(time_at_seconds):
     
-    # check witch type of sample to take
+    # check witch type of sample to take.
+    # for windows
     if WINDOWS in sys.platform:
-         thread = Thread(target=win_get_sample, args=(time_at_seconds,))
-            thread.start()
+        win_get_sample(time_at_seconds)
+    
+    # for linux
     else:
         pass
