@@ -1,6 +1,6 @@
 import psutil
 import subprocess
-import re
+
 
 def win_sample():
     """
