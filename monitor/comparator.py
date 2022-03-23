@@ -5,9 +5,10 @@ class comparator:
         self.sample_1 = sample_1
         self.sample_2 = sample_2
 
-    def compare(self, sample1, sample2):
+    def compare(self, newest_sample, old_sample):
         print("blabla\n")
-        diff_sample = list(set(sample1) - set(sample2))
+        diff_sample = list(set(newest_sample) - set(old_sample))
         print(diff_sample)
+
         pass
 
