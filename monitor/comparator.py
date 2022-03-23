@@ -1,3 +1,4 @@
+import time
 
 
 class comparator:
@@ -9,6 +10,9 @@ class comparator:
         print("blabla\n")
         diff_sample = list(set(newest_sample) - set(old_sample))
         print(diff_sample)
-
-        pass
+        with open("status_log.txt", "a") as f:
+            for name, status in diff_sample:
+                current_time = time.ctime().replace(' ', '-')
+                # print(f"{current_time} {name} {status}")
+                f.write(f"{current_time} {name} {status}\n")
 
