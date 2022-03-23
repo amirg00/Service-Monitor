@@ -7,7 +7,7 @@ class comparator:
 
     def compare(self, sample1, sample2):
         print("blabla\n")
-        diff_sample = sample1 - sample2
+        diff_sample = list(set(sample1) - set(sample2))
         print(diff_sample)
         pass
 
