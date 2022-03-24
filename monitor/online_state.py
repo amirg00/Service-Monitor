@@ -52,7 +52,6 @@ class online_state:
 
             time.sleep(time_at_seconds)
 
-
     def main(self, time_at_seconds):
         # check witch type of sample to take.
         # for windows

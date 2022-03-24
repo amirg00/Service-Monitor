@@ -4,20 +4,19 @@ import subprocess
 
 def win_sample():
     """
-    Function return a sample of services
-    for the curent time. sample is list of
-    tuple, each tuple is service witw
-    name and status.
+    Function return a sample of services for the current time. sample is list of
+    tuple, each tuple is a service with name and status.
     """
     services_list = list(psutil.win_service_iter())
     return [(service.name(), psutil.win_service_get(service.name()).status()) for service in services_list]
 
 
+# TODO: NEED TO FIX WHEN GIVEN A SERVICE NAME WITH SPACE, SUCH AS: 'AVG ANTIVIRUS'
 def linux_sample():
     """
-    The function return the services sample for linux operation system.
+    The function return the services sample for linux operating system.
     Sample is returned as a list of tuples (couples when first value is the server status -
-    'still running or already stopped' and the second value is the service's name.
+    'still running or already stopped' and the second value is the service's name).
     :return: the services list as a tuple: [(STATUS, SERVICE_NAME)...].
     """
     running = '+'
@@ -41,5 +40,3 @@ def linux_sample():
         services_lst.insert(index, (status, service_name))
 
     return services_lst
-
-
