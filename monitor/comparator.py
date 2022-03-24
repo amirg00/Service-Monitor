@@ -7,7 +7,13 @@ class comparator:
         self.sample_2 = sample_2
 
     def compare(self, newest_sample, old_sample):
-        print("blabla\n")
+        """
+        Method compares the two given samples to see differences in status of the services,
+        then writes it to the 'status_log.txt' file.
+        :param newest_sample: the new sample
+        :param old_sample: the old sample
+        :return: None
+        """
         diff_sample = list(set(newest_sample) - set(old_sample))
         print(diff_sample)
         with open("status_log.txt", "a") as f:
@@ -23,6 +29,13 @@ class comparator:
                 f.write(f"{current_time} {service_name} killed")
 
     def dead_services(self, old_sample: list, new_sample: list):
+        """
+        The method finds the dead services, services which could be found in the old
+        sample but are no longer in the new sample.
+        :param old_sample: the old sample
+        :param new_sample: the new sample
+        :return: the dead services
+        """
         dead_services = []
         for name, status in old_sample:
             flag = False
@@ -31,5 +44,4 @@ class comparator:
                     flag = True
             if not flag:
                 dead_services.append(name)
-
         return dead_services
