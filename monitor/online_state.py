@@ -25,10 +25,9 @@ class online_state:
         """
         with open("service_list.txt", "a") as f:
             for name, status in sample:
-                current_time1 = datetime.now().strftime("%d-%m-%Y-%H:%M:%S")
-                # current_time = time.ctime().replace(' ', '-')
+                current_time = datetime.now().strftime("%d-%m-%Y-%H:%M:%S")
                 # print(f"{current_time} {name} {status}")
-                f.write(f"{current_time1} {name} {status}\n")
+                f.write(f"{current_time} {name} {status}\n")
 
     def get_sample(self, get_sample_by_os, time_at_seconds):
         """
