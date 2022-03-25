@@ -30,9 +30,9 @@ def linux_sample():
         status, service_name = service_symbols[2], service_symbols[5]
 
         if status == running:
-            status = "Running"
+            status = "running"
         else:
-            status = "Stopped"
+            status = "stopped"
 
         services_lst.insert(index, (status, service_name))
 
