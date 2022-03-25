@@ -22,14 +22,11 @@ def linux_sample():
     running = '+'
     services_lst = []
     output_str = subprocess.check_output("service --status-all", shell=True).decode("UTF-8")
-    services_list = output_str.split('\n')
+    services_list = output_str.split('\n')[:-1] # remove the last '' after last \n
 
     for index, service in enumerate(services_list):
-        # Happens because the last \n after split
-        if service == "":
-            continue
+        
         service_symbols = service.split(' ')
-
         status, service_name = service_symbols[2], service_symbols[5]
 
         if status == running:
