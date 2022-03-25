@@ -1,4 +1,5 @@
 import time
+from datetime import datetime
 
 
 class comparator:
@@ -21,7 +22,7 @@ class comparator:
                 print(status)
                 if status != "running" and status != "stopped":
                     continue
-                current_time = time.ctime().replace(' ', '-')
+                current_time = datetime.now().strftime("%d-%m-%Y-%H:%M:%S")
                 f.write(f"{current_time} {name} {status}\n")
 
             dead_serves = self.dead_services(old_sample, newest_sample)
