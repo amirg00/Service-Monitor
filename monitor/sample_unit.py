@@ -11,7 +11,6 @@ def win_sample():
     return [(service.name(), psutil.win_service_get(service.name()).status()) for service in services_list]
 
 
-# TODO: NEED TO FIX WHEN GIVEN A SERVICE NAME WITH SPACE, SUCH AS: 'AVG ANTIVIRUS'
 def linux_sample():
     """
     The function return the services sample for linux operating system.
@@ -22,12 +21,12 @@ def linux_sample():
     running = '+'
     services_lst = []
     output_str = subprocess.check_output("service --status-all", shell=True).decode("UTF-8")
-    services_list = output_str.split('\n')[:-1] # remove the last '' after last \n
+    services_list = output_str.split('\n')[:-1]  # remove the last '' after last \n
 
     for index, service in enumerate(services_list):
         
         service_symbols = service.split(' ')
-        status, service_name = service_symbols[2], service_symbols[5]
+        status, service_name = service_symbols[2], " ".join(service_symbols[5:])
 
         if status == running:
             status = "running"
