@@ -11,8 +11,8 @@ class export_sample_unit:
         self.delta_time = timedelta(seconds=5)
 
     def compare_diff_export_samples(self):
-        compare = comparator(self.sample_1, self.sample_2)
-        compare.compare(self.export_sample(self.sample_2), self.export_sample(self.sample_1))
+        compare = comparator(self.export_sample(self.sample_2), self.export_sample(self.sample_1))
+        print(compare.compare_offline())
 
     def export_sample(self, sample_measure_time):
         with open("service_list.txt", "r") as f:
@@ -24,7 +24,6 @@ class export_sample_unit:
                 format_2 = self.get_date_formatted(line_lst[0])
 
                 if format_2 <= format_1 and self.compare_time_by_epsilon(format_2, format_1):
-
                     while lines[::-1][index].split(' ')[0] == line_lst[0]:
                         line_lst = lines[::-1][index].split(' ')
                         service_name = ""

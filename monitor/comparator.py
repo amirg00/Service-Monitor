@@ -3,46 +3,27 @@ from datetime import datetime
 
 
 class comparator:
-    def __init__(self, sample_1, sample_2):
-        self.sample_1 = sample_1
-        self.sample_2 = sample_2
+    def __init__(self, newest_sample, old_sample):
+        # the older sample
+        self.old_sample = old_sample
+        # the newer sample
+        self.newest_sample = newest_sample
 
-    def compare(self, newest_sample, old_sample):
+    def compare(self):
         """
-        Method compares the two given samples to see differences in status of the services,
+        ONLINE MODE: Method compares the two given samples to see differences in status of the services,
         then writes it to the 'status_log.txt' file.
-        :param newest_sample: the new sample
-        :param old_sample: the old sample
-        :return: None
+        :return: the difference list
         """
-        diff_sample = list(set(newest_sample) - set(old_sample))
-        print(diff_sample)
-        with open("status_log.txt", "a") as f:
-            for name, status in diff_sample:
-                print(status)
-                if status != "running" and status != "stopped":
-                    continue
-                current_time = datetime.now().strftime("%d-%m-%Y-%H:%M:%S")
-                f.write(f"{current_time} {name} {status}\n")
+        print(list(set(self.newest_sample) - set(self.old_sample)))
+        return list(set(self.newest_sample) - set(self.old_sample))
 
-            dead_serves = self.dead_services(old_sample, newest_sample)
-            for service_name in dead_serves:
-                f.write(f"{current_time} {service_name} killed")
-
-    def dead_services(self, old_sample: list, new_sample: list):
+    def compare_offline(self,):
         """
-        The method finds the dead services, services which could be found in the old
-        sample but are no longer in the new sample.
-        :param old_sample: the old sample
-        :param new_sample: the new sample
-        :return: the dead services
+        OFFLINE MODE: Method compares the two given samples to see differences in status of the services,
+        then returns it.
+        :return: the concat list.
         """
-        dead_services = []
-        for name, status in old_sample:
-            flag = False
-            for name_2, status_2 in new_sample:
-                if name == name_2:
-                    flag = True
-            if not flag:
-                dead_services.append(name)
-        return dead_services
+        run_diff_sample = [(name, "running") for name, status in list(set(self.newest_sample) - set(self.old_sample))]
+        stop_diff_sample = [(name, "stopped") for name, status in list(set(self.old_sample) - set(self.newest_sample))]
+        return run_diff_sample + stop_diff_sample
