@@ -60,16 +60,12 @@ def main():
         online = online_state()
         online.main(seconds)
 
-
+    # open monitor in OFFLINE mode
+    else:
+        time_1, time_2 = get_two_sample_times()
+        offline = offline_state()
+        offline.main(time_1, time_2)
 
 
 if __name__ == '__main__':
-
-    elif args.state == "offline":
-        sample_time = input("Enter a sample time: ")
-        sample_2_time = input("Enter a second sample time: ")
-        offline = offline_state()
-        offline.main(sample_time, sample_2_time)
-
-    else:
-        print("Invalid argument")
+    main()
