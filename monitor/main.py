@@ -26,6 +26,7 @@ def print_explantion():
     """
     print(explanation)
     
+
 def get_monitor_mode():
     """
     function ask the user for monitor state and return the chosen state
@@ -36,25 +37,33 @@ def get_monitor_mode():
     return monitor_state
 
 
+def get_time_at_seconds():
+    """
+    function return a integer number of seconds from user
+    """
+    seconds = None
+    while not seconds.isnumeric():
+        seconds = input("Enter number of seconds: ")
+
+    return int(seconds)
+
+
 def main():
     # print some details
     print_explanation()
 
     monitor_mode = get_monitor_mode()
     
+    # open monitor in ONLINE mode
+    if monitor_mode == ONLINE:
+        seconds = get_time_at_seconds()
+        online = online_state()
+        online.main(seconds)
 
 
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='Monitor')
-    parser.add_argument('time_at_seconds', help='render time in seconds')
-    parser.add_argument('state', help='state for online/offline')
-    args = parser.parse_args()
-
-    if args.state == "online":
-        online = online_state()
-        online.main(int(args.time_at_seconds))
 
     elif args.state == "offline":
         sample_time = input("Enter a sample time: ")
