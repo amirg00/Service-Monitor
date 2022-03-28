@@ -2,6 +2,9 @@ import argparse
 from online_state import online_state
 from offline_state import offline_state
 
+ONLINE = "online"
+OFFLINE = "offline"
+
 def print_explantion():
     """
     function prints some details about the monitor
@@ -23,6 +26,15 @@ def print_explantion():
     """
     print(explanation)
     
+def get_monitor_mode():
+    """
+    function ask the user for monitor state and return the chosen state
+    """
+    monitor_state = None
+    while monitor_state != ONLINE and monitor_state != OFFLINE:
+        monitor_state = input("Enter the desired mode (online / offline): ").lower()
+    return monitor_state
+
 
 def main():
     # print some details
