@@ -33,7 +33,6 @@ class online_state:
         with open("service_list.txt", "a") as f:
             for name, status in sample:
                 current_time = datetime.now().strftime("%d-%m-%Y-%H:%M:%S")
-                # print(f"{current_time} {name} {status}")
                 if status == "running":
                     f.write(f"{current_time} {name} {status}\n")
 
@@ -46,18 +45,15 @@ class online_state:
         while True:
             sample = get_sample_by_os()
             self.write_to_service_list(sample)
-            print(len(self.queue))
 
             # insert sample into Queue for comparison
             if len(self.queue) == 2:
                 self.queue.pop()
                 self.queue.insert(0, sample)
-                print("vlalala")
                 self.write_to_logs()
 
             elif len(self.queue) == 1 or len(self.queue) == 0:
                 self.queue.insert(0, sample)
-                print("dididid")
 
             time.sleep(time_at_seconds)
 
