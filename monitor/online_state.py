@@ -22,10 +22,10 @@ class online_state:
                 if status != "running" and status != "stopped":
                     continue
                 current_time = datetime.now().strftime("%d-%m-%Y-%H:%M:%S")
-                print(f"{current_time} {name} {status}\n")
+                print(f"{current_time} {name} {status}")
                 f.write(f"{current_time} {name} {status}\n")
 
-    def write_to_service_list(self, sample):
+    def write_to_service_list(self, sample, is_first_sample):
         """
         Function gets sample and inserts it to the 'service_list.txt' file
         :return: None
@@ -34,6 +34,7 @@ class online_state:
             for name, status in sample:
                 current_time = datetime.now().strftime("%d-%m-%Y-%H:%M:%S")
                 if status == "running":
+                    print(f"{current_time} {name} {status}") if is_first_sample else None
                     f.write(f"{current_time} {name} {status}\n")
 
     def get_sample(self, get_sample_by_os, time_at_seconds):
@@ -42,9 +43,10 @@ class online_state:
         and sent it to write into service_list.
         and then, insert it to Queue for logs file.
         """
+        is_first_sample = True
         while True:
             sample = get_sample_by_os()
-            self.write_to_service_list(sample)
+            self.write_to_service_list(sample, is_first_sample)
 
             # insert sample into Queue for comparison
             if len(self.queue) == 2:
@@ -56,6 +58,7 @@ class online_state:
                 self.queue.insert(0, sample)
 
             time.sleep(time_at_seconds)
+            is_first_sample = False
 
     def main(self, time_at_seconds):
         # check witch type of sample to take.
