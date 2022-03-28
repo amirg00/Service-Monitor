@@ -15,7 +15,6 @@ class comparator:
         then writes it to the 'status_log.txt' file.
         :return: the difference list
         """
-        print(list(set(self.newest_sample) - set(self.old_sample)))
         return list(set(self.newest_sample) - set(self.old_sample))
 
     def compare_offline(self,):
