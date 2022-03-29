@@ -7,23 +7,29 @@ OFFLINE = "offline"
 
 def print_explanation():
     """
-    function prints some details about the monitor
+    Function prints some details about the monitor.
     """
     explanation = """
-    Hello User,
-    You have two modes for operating the monitor: online and offline.
-    In online mode:
-        You enter a fixed number of seconds,
-        Then non-stop for the same number of seconds the system will
-        sample services on your computer, and save the samples and
-        the changes that occur between samples in log files.
-    In offline mode:
-        Enter into the system two hours in which a sample has been sampled in the past,
-        And you will be presented with an output describing a log between the two samples.
-
-    So, what mode would you like to activate?
-    Good luck!
-    """
+*********************************************************************************************
+*   Hello User,                                                                             * 
+*   Welcome to our service monitor!                                                         *
+*                                                                                           *
+*   You have two modes for operating the monitor: ONLINE & OFFLINE.                         *
+*   In ONLINE mode:                                                                         *
+*       You will be asked to enter a fixed number of seconds (X),                           *
+*       then for every X seconds the system will sample services on your computer,          *
+*       and store the samples in service_list.txt file. Additionally, the changes that      *
+*       occur between samples in log files would be presented                               *
+*       by our software, and will be stored in status_log.txt file as well.                 *
+*                                                                                           *
+*   In OFFLINE mode:                                                                        *
+*       Enter two hours in which a sample has been sampled in the past,                     *
+*       And you will be presented with an output describing a log between the two samples.  *
+*                                                                                           *
+*    So, what mode would you rather to activate?                                            *
+*    Good luck!                                                                             *
+********************************************************************************************* 
+"""
     print(explanation)
     
 
@@ -80,20 +86,27 @@ def get_two_sample_times():
 def main():
     # print some details
     print_explanation()
+    while True:
+        monitor_mode = get_monitor_mode()
 
-    monitor_mode = get_monitor_mode()
-    
-    # open monitor in ONLINE mode
-    if monitor_mode == ONLINE:
-        seconds = get_time_at_seconds()
-        online = online_state()
-        online.main(seconds)
+        # open monitor in ONLINE mode
+        if monitor_mode == ONLINE:
+            seconds = get_time_at_seconds()
+            online = online_state()
+            try:
+                online.main(seconds)
+            except:
+                pass
 
-    # open monitor in OFFLINE mode
-    else:
-        time_1, time_2 = get_two_sample_times()
-        offline = offline_state()
-        offline.main(time_1, time_2)
+        # open monitor in OFFLINE mode
+        else:
+            time_1, time_2 = get_two_sample_times()
+            offline = offline_state()
+            offline.main(time_1, time_2)
+
+        exit = input("Press E to exit, or any other key to continue\n").upper()
+        if exit == 'E':
+            break
 
 
 if __name__ == '__main__':
