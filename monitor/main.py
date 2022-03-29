@@ -67,6 +67,16 @@ def get_str_time(sample_num):
     return str_time
 
 
+def get_two_sample_times():
+    """
+    function return two times from user
+    for the offline monitor state
+    """
+    time_1 = get_str_time(1)
+    time_2 = get_str_time(2)
+    return time_1, time_2
+
+
 def main():
     # print some details
     print_explanation()
