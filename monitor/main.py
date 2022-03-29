@@ -5,7 +5,7 @@ from offline_state import offline_state
 ONLINE = "online"
 OFFLINE = "offline"
 
-def print_explantion():
+def print_explanation():
     """
     function prints some details about the monitor
     """
@@ -41,7 +41,7 @@ def get_time_at_seconds():
     """
     function return a integer number of seconds from user
     """
-    seconds = None
+    seconds = ''
     while not seconds.isnumeric():
         seconds = input("Enter number of seconds: ")
 
