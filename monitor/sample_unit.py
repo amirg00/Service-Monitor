@@ -33,6 +33,6 @@ def linux_sample():
         else:
             status = "stopped"
 
-        services_lst.insert(index, (status, service_name))
+        services_lst.insert(index, (service_name, status))
 
     return services_lst
