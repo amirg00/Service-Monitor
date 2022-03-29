@@ -1,4 +1,4 @@
-import argparse
+from datetime import datetime
 from online_state import online_state
 from offline_state import offline_state
 
@@ -46,6 +46,25 @@ def get_time_at_seconds():
         seconds = input("Enter number of seconds: ")
 
     return int(seconds)
+
+
+def get_str_time(sample_num):
+    """
+    function ask the user for time,
+    and return the time when is valid.
+    """
+    str_time = ''
+    is_valid = False
+
+    while not is_valid:
+        str_time = input(f"Please enter sample {sample_num} time (DD-MM-YYYY-hh:mm:ss): ")
+        try:
+            datetime.strptime(str_time, "%d-%m-%Y-%H:%M:%S")
+            is_valid = True
+        except:
+            print("Invalid date format, please try again.")
+
+    return str_time
 
 
 def main():
