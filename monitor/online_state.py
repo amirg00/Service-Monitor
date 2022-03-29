@@ -1,4 +1,5 @@
 import sys
+import os
 from datetime import datetime
 import sample_unit
 from comparator import comparator
@@ -9,6 +10,7 @@ class online_state:
     def __init__(self):
         self.queue = []
         self.WINDOWS = "win"
+        self.last_modification_time = ''
 
     def write_to_logs(self):
         """
@@ -17,25 +19,43 @@ class online_state:
         """
         compare = comparator(self.queue[0], self.queue[1])
         diff_sample = compare.compare()
+        
         with open("status_log.txt", "a") as f:
+            current_time = datetime.now().strftime("%d-%m-%Y-%H:%M:%S")
             for name, status in diff_sample:
                 if status != "running" and status != "stopped":
                     continue
-                current_time = datetime.now().strftime("%d-%m-%Y-%H:%M:%S")
                 print(f"{current_time} {name} {status}")
                 f.write(f"{current_time} {name} {status}\n")
+        
 
     def write_to_service_list(self, sample, is_first_sample):
         """
         Function gets sample and inserts it to the 'service_list.txt' file
         :return: None
         """
+        # security check
+        if not is_first_sample:
+            try:
+                modTimesinceEpoc = os.path.getmtime("service_list.txt")
+                modificationTime = time.strftime('%Y-%m-%d-%H:%M:%S', time.localtime(modTimesinceEpoc))
+                if self.last_modification_time != modificationTime:
+                    print("Warning: file service_list.txt was changed unexpectedly!!!")
+                
+            except:
+                print("Warning: file service_list.txt was deleted!!!")
+        
         with open("service_list.txt", "a") as f:
             for name, status in sample:
                 current_time = datetime.now().strftime("%d-%m-%Y-%H:%M:%S")
                 if status == "running":
                     print(f"{current_time} {name} {status}") if is_first_sample else None
                     f.write(f"{current_time} {name} {status}\n")
+        
+        # update program about the current last modified date
+        modTimesinceEpoc = os.path.getmtime("service_list.txt")
+        modificationTime = time.strftime('%Y-%m-%d-%H:%M:%S', time.localtime(modTimesinceEpoc))
+        self.last_modification_time = modificationTime
 
     def get_sample(self, get_sample_by_os, time_at_seconds):
         """
