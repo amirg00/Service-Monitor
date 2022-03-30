@@ -76,7 +76,7 @@ be removed from the queue, the last sample becomes the old sample
 and then the new sample will be inserted to the queue.
 Note that this procedure recurrent throughout the entire running.
 
-The following picture depict a glance about how the offline works:
+The following picture depict a glance about how the offline mode works:
 
 <p align="center">
 <img align="center" src="system_desing/offline state.drawio.png" />
