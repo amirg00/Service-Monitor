@@ -49,7 +49,6 @@ class online_state:
             for name, status in sample:
                 current_time = datetime.now().strftime("%d-%m-%Y-%H:%M:%S")
                 if status == "running":
-                    print(f"{current_time} {name} {status}") if is_first_sample else None
                     f.write(f"{current_time} {name} {status}\n")
         
         # update program about the current last modified date

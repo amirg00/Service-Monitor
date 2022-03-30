@@ -31,6 +31,9 @@ class export_sample_unit:
                             service_name += line_lst[i]
                         sample.append((service_name, line_lst[len(line_lst) - 1]))
                         index += 1
+                        # loop break condition to avoid out of bounds error.
+                        if index >= len(lines[::-1]):
+                            break
                     break
         f.close()
         return sample
