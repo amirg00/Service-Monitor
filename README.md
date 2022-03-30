@@ -24,17 +24,17 @@ In this project we had to design a software which monitors the running services
 onto the computer, considering two separate operating systems (ubuntu-linux, windows)
 making this software cross-platform.
 
-###software details
+### software details
 The software has to modes: 
 
-####ONLINE MODE
+#### ONLINE MODE
 In this mode, the user is asked to enter X seconds, when every X 
 seconds the software samples the running services on the operating system, 
 and then insert it to a file. After each taken sample the software will
 compare between the current taken sample and the previous one, which operates by the compare unit.
 These differences between the two will be inserted into a log file as well.
 
-####OFFLINE MODE
+#### OFFLINE MODE
 In this mode, the user is asked to enter two dates in which a sampled has occurred,
 if the sample date entered by the user isn't compatible to any of the 
 samples date, then the software rounds the given time stamps to the closest
