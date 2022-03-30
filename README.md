@@ -183,7 +183,7 @@ _**Python Version:**_ ```3.9```
  
  Simcha - [here](https://github.com/SimchaTeich)
 
-Project Link: [here](https://github.com/amirg00/Simple-Chat)
+Project Link: [here](https://github.com/amirg00/Service-Monitor)
 
 ___
 
