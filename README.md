@@ -38,7 +38,7 @@ These differences between the two will be inserted into a log file as well.
 In this mode, the user is asked to enter two dates in which a sampled has occurred,
 if the sample date entered by the user isn't compatible to any of the 
 samples date, then the software rounds the given time stamps to the closest
-sample inside a 5 seconds interval. Afterwards, the software
+sample among a 5 seconds interval. Afterwards, the software
 compares the two samples and present it to the user.
 
 
